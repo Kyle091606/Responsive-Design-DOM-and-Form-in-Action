@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Directory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Student Directory</h1>
+      <p>Add and manage student records</p>
+    </header>
+
+    <div class="content">
+      <section class="form-section">
+        <form id="student-form">
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+          </div>
+          <div>
+            <label for="program">Program:</label>
+            <input type="text" name="program" id="program" required>
+          </div>
+          <button type="submit">Add Student</button>
+        </form>
+      </section>
+
+      <section id="grid" class="student-list"></section>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('student-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const program = document.getElementById('program').value;
+
+      const card = document.createElement('div');
+      card.className = 'student-card';
+      card.innerHTML = `<h3>${name}</h3><p>${program}</p>`;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'remove-btn';
+      removeBtn.textContent = 'Remove';
+      removeBtn.onclick = () => card.remove();
+      card.appendChild(removeBtn);
+
+      document.getElementById('grid').appendChild(card);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
